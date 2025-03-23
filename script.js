@@ -14,7 +14,7 @@ let selectedSort = 'ascending';
 
 const BASE_URL = "https://api.spoonacular.com/recipes/random";
 const API_KEY = "765002ba2ca14dffb9a0e1dd128843f1";
-const URL = `${BASE_URL}?apiKey=${API_KEY}&number=70`;
+const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=70`;
 
 // === FETCH FROM API ===
 const fetchData = async () => {
@@ -29,7 +29,7 @@ const fetchData = async () => {
       if (isFresh) {
         allRecipes = JSON.parse(storedRecipes);
         workingArray = [...allRecipes];
-        loadRecipes(workingArray);
+        applySortAndRender();
         return;
       }
     }
@@ -44,8 +44,6 @@ const fetchData = async () => {
     }
 
     const data = await response.json();
-
-    // ✅ Only require image and title – filtering comes later
     const apiRecipes = data.recipes.filter(recipe =>
       recipe.image && recipe.title
     );
@@ -89,8 +87,26 @@ const loadRecipes = (array) => {
   recipeContainer.innerHTML = '';
 
   if (array.length === 0) {
-    recipeContainer.innerHTML = '<p>No recipes found for the selected filter(s).</p>';
-    return;
+    // Fallback om inga recept hittas
+    const matchingFallbacks = fallbackRecipes.filter(recipe =>
+      activeFilters.length === 0 || recipe.cuisines.some(cuisine =>
+        activeFilters.includes(cuisine.toLowerCase())
+      )
+    );
+
+    if (matchingFallbacks.length > 0) {
+      recipeContainer.innerHTML = `
+        <p>No API recipes found for the selected filter(s).</p>
+        <p>Showing fallback recipes instead:</p>
+      `;
+      array = matchingFallbacks;
+    } else {
+      recipeContainer.innerHTML = `
+        <p>No recipes found for the selected filter(s).</p>
+        <p>Try again or choose another filter.</p>
+      `;
+      return;
+    }
   }
 
   array.forEach(recipe => {
