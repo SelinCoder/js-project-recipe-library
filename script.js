@@ -12,9 +12,11 @@ let allRecipes = [];
 let workingArray = [];
 let selectedSort = 'ascending';
 
+// ✅ FIXED: Removed / and extra }
 const BASE_URL = "https://api.spoonacular.com/recipes/random";
 const API_KEY = "765002ba2ca14dffb9a0e1dd128843f1";
-const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=70}`;
+const URL = `${BASE_URL}?apiKey=${API_KEY}&number=70`;
+
 
 // === FETCH FROM API ===
 const fetchData = async () => {
