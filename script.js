@@ -14,7 +14,7 @@ let selectedSort = 'ascending';
 
 const BASE_URL = "https://api.spoonacular.com/recipes/random";
 const API_KEY = "765002ba2ca14dffb9a0e1dd128843f1";
-const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=70`;
+const URL = `${BASE_URL}?apiKey=${API_KEY}&number=70`;
 
 // === FETCH FROM API ===
 const fetchData = async () => {
@@ -87,24 +87,17 @@ const loadRecipes = (array) => {
   recipeContainer.innerHTML = '';
 
   if (array.length === 0) {
-    // Fallback om inga recept hittas
-    const matchingFallbacks = fallbackRecipes.filter(recipe =>
-      activeFilters.length === 0 || recipe.cuisines.some(cuisine =>
+    const fallbackForCuisine = fallbackRecipes.filter(recipe =>
+      recipe.cuisines.some(cuisine =>
         activeFilters.includes(cuisine.toLowerCase())
       )
     );
 
-    if (matchingFallbacks.length > 0) {
-      recipeContainer.innerHTML = `
-        <p>No API recipes found for the selected filter(s).</p>
-        <p>Showing fallback recipes instead:</p>
-      `;
-      array = matchingFallbacks;
+    if (fallbackForCuisine.length > 0) {
+      recipeContainer.innerHTML = `<p>No recipes found from the API. Showing fallback results instead.</p>`;
+      array = fallbackForCuisine;
     } else {
-      recipeContainer.innerHTML = `
-        <p>No recipes found for the selected filter(s).</p>
-        <p>Try again or choose another filter.</p>
-      `;
+      recipeContainer.innerHTML = '<p>No recipes found. Try again or choose another filter.</p>';
       return;
     }
   }
