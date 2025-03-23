@@ -11,7 +11,7 @@ const fallbackRecipes = [
       { name: "beef broth", measures: { metric: { amount: 500, unitShort: "ml" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Slice onions." }, { step: "Simmer in broth." } ] }
+      { steps: [{ step: "Slice onions." }, { step: "Simmer in broth." }] }
     ]
   },
   {
@@ -24,7 +24,7 @@ const fallbackRecipes = [
       { name: "cheese", measures: { metric: { amount: 50, unitShort: "g" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Assemble sandwich." }, { step: "Grill until golden." } ] }
+      { steps: [{ step: "Assemble sandwich." }, { step: "Grill until golden." }] }
     ]
   },
 
@@ -39,7 +39,7 @@ const fallbackRecipes = [
       { name: "bacon", measures: { metric: { amount: 50, unitShort: "g" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Cook pasta." }, { step: "Mix with bacon and egg." } ] }
+      { steps: [{ step: "Cook pasta." }, { step: "Mix with bacon and egg." }] }
     ]
   },
   {
@@ -52,7 +52,7 @@ const fallbackRecipes = [
       { name: "mozzarella", measures: { metric: { amount: 100, unitShort: "g" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Add toppings." }, { step: "Bake in oven." } ] }
+      { steps: [{ step: "Add toppings." }, { step: "Bake in oven." }] }
     ]
   },
 
@@ -67,7 +67,7 @@ const fallbackRecipes = [
       { name: "teriyaki sauce", measures: { metric: { amount: 50, unitShort: "ml" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Cook chicken." }, { step: "Add sauce and simmer." } ] }
+      { steps: [{ step: "Cook chicken." }, { step: "Add sauce and simmer." }] }
     ]
   },
   {
@@ -80,35 +80,7 @@ const fallbackRecipes = [
       { name: "soy sauce", measures: { metric: { amount: 30, unitShort: "ml" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Stir-fry vegetables." }, { step: "Add sauce." } ] }
-    ]
-  },
-
-  // === AMERICAN ===
-  {
-    title: "Cheeseburger",
-    readyInMinutes: 20,
-    cuisines: ["American"],
-    image: "https://via.placeholder.com/300x200?text=Cheeseburger",
-    extendedIngredients: [
-      { name: "beef patty", measures: { metric: { amount: 1, unitShort: "pc" } } },
-      { name: "cheddar", measures: { metric: { amount: 1, unitShort: "slice" } } }
-    ],
-    analyzedInstructions: [
-      { steps: [ { step: "Grill patty." }, { step: "Assemble burger." } ] }
-    ]
-  },
-  {
-    title: "Mac and Cheese",
-    readyInMinutes: 25,
-    cuisines: ["American"],
-    image: "https://via.placeholder.com/300x200?text=Mac+%26+Cheese",
-    extendedIngredients: [
-      { name: "macaroni", measures: { metric: { amount: 100, unitShort: "g" } } },
-      { name: "cheese", measures: { metric: { amount: 150, unitShort: "g" } } }
-    ],
-    analyzedInstructions: [
-      { steps: [ { step: "Boil pasta." }, { step: "Mix with cheese sauce." } ] }
+      { steps: [{ step: "Stir-fry vegetables." }, { step: "Add sauce." }] }
     ]
   },
 
@@ -123,7 +95,7 @@ const fallbackRecipes = [
       { name: "cream", measures: { metric: { amount: 100, unitShort: "ml" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Roll meatballs." }, { step: "Fry and add sauce." } ] }
+      { steps: [{ step: "Roll meatballs." }, { step: "Fry and add sauce." }] }
     ]
   },
   {
@@ -136,7 +108,7 @@ const fallbackRecipes = [
       { name: "vinegar", measures: { metric: { amount: 20, unitShort: "ml" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Boil potatoes." }, { step: "Mix with dressing." } ] }
+      { steps: [{ step: "Boil potatoes." }, { step: "Mix with dressing." }] }
     ]
   },
 
@@ -151,7 +123,7 @@ const fallbackRecipes = [
       { name: "chicken", measures: { metric: { amount: 150, unitShort: "g" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Cook chicken." }, { step: "Assemble tacos." } ] }
+      { steps: [{ step: "Cook chicken." }, { step: "Assemble tacos." }] }
     ]
   },
   {
@@ -164,7 +136,7 @@ const fallbackRecipes = [
       { name: "lime", measures: { metric: { amount: 1, unitShort: "pc" } } }
     ],
     analyzedInstructions: [
-      { steps: [ { step: "Mash avocado." }, { step: "Mix with lime and seasoning." } ] }
+      { steps: [{ step: "Mash avocado." }, { step: "Mix with lime and seasoning." }] }
     ]
   }
 ];
