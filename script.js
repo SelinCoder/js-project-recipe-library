@@ -10,7 +10,7 @@ const loadingSpinner = document.getElementById('loading-spinner');
 let activeFilters = [];
 let allRecipes = [];
 let workingArray = [];
-let selectedSort = 'ascending'; // Default sorting is ascending
+let selectedSort = 'ascending';
 
 const BASE_URL = "https://api.spoonacular.com/recipes/random";
 const API_KEY = "765002ba2ca14dffb9a0e1dd128843f1";
@@ -27,7 +27,6 @@ const fetchData = async () => {
     if (storedRecipes && storedTimestamp) {
       const isFresh = now - new Date(storedTimestamp) < 24 * 60 * 60 * 1000;
       if (isFresh) {
-        console.log("Using cached recipes...");
         allRecipes = JSON.parse(storedRecipes);
         workingArray = [...allRecipes];
         loadRecipes(workingArray);
@@ -35,7 +34,6 @@ const fetchData = async () => {
       }
     }
 
-    console.log("Fetching new recipes...");
     const response = await fetch(URL);
     if (!response.ok) {
       if (response.status === 402) {
@@ -181,7 +179,6 @@ const randomRecipe = () => {
   const randomIndex = Math.floor(Math.random() * workingArray.length);
   const chosen = [workingArray[randomIndex]];
   loadRecipes(chosen);
-  workingArray = [...allRecipes];
 };
 
 // === INIT ===
@@ -197,7 +194,6 @@ filterButtons.forEach(button => {
 sortButtons.forEach(button => {
   button.addEventListener('click', () => {
     selectedSort = button.id;
-    console.log("Sort selected:", selectedSort); // För felsökning
     applySortAndRender();
   });
 });
