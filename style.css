@@ -16,6 +16,9 @@ h1 {
   font-weight: 700;
   text-align: center;
   margin-top: 30px;
+  text-align: left;
+  padding-left: 7%;
+  
   
 }
 
@@ -224,6 +227,7 @@ a {
 @media (min-width: 650px) {
   body {
     padding: 0 2%;
+    
   }
 
   .filter-group {
