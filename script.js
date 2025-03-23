@@ -12,11 +12,9 @@ let allRecipes = [];
 let workingArray = [];
 let selectedSort = 'ascending';
 
-// ✅ FIXED: Removed / and extra }
 const BASE_URL = "https://api.spoonacular.com/recipes/random";
 const API_KEY = "765002ba2ca14dffb9a0e1dd128843f1";
 const URL = `${BASE_URL}?apiKey=${API_KEY}&number=70`;
-
 
 // === FETCH FROM API ===
 const fetchData = async () => {
@@ -46,8 +44,9 @@ const fetchData = async () => {
     }
 
     const data = await response.json();
+
+    // ✅ Only require image and title – filtering comes later
     const apiRecipes = data.recipes.filter(recipe =>
-      recipe.cuisines.some(cuisine => activeFilters.includes(cuisine.toLowerCase())) &&
       recipe.image && recipe.title
     );
 
