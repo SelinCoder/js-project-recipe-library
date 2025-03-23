@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+}
 
 body {
   background: #FAFBFF;
@@ -11,16 +12,19 @@ body {
 
 h1 {
   color: #0018A4;
-  font-size: 40px;
+  font-size: 64px;
   font-weight: 700;
   text-align: center;
+  margin-top: 30px;
   
 }
 
 .small-head {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   padding: 10px 0;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 
 .filter-group,
@@ -265,5 +269,41 @@ a {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@media (max-width: 350px) {
+  body {
+    padding: 0 1%;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .recipe-card {
+    width: 100%;
+  }
+
+  .filter-options,
+  .sort-options,
+  .lazy-option {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .small-head {
+    font-size: 16px;
+  }
+
+  .filter-container,
+  .sort-container,
+  .lazy-container {
+    min-width: auto;
   }
 }

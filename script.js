@@ -46,8 +46,8 @@ const fetchData = async () => {
     }
 
     const data = await response.json();
-    const apiRecipes = data.recipes.filter(recipe => 
-      recipe.cuisines.some(cuisine => activeFilters.includes(cuisine.toLowerCase())) && // Fixed filter logic
+    const apiRecipes = data.recipes.filter(recipe =>
+      recipe.cuisines.some(cuisine => activeFilters.includes(cuisine.toLowerCase())) &&
       recipe.image && recipe.title
     );
 
@@ -56,7 +56,7 @@ const fetchData = async () => {
 
     allRecipes = [...apiRecipes];
     workingArray = [...allRecipes];
-    applySortAndRender(); // Ensure sorting is applied here
+    applySortAndRender();
   } catch (error) {
     console.error('Fetch error:', error.message);
     recipeContainer.innerHTML = `<p>${error.message}</p>`;
@@ -101,7 +101,7 @@ const loadRecipes = (array) => {
         <img src="${imageUrl}" alt="${recipe.title}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
         <h3>${recipe.title}</h3>
         <div class="border-top-bottom">
-          <p><strong>Ready in:</strong> ${recipe.readyInMinutes} minutes</p>
+          <p><strong>Ready in:</strong> ${recipe.readyInMinutes || "?"} minutes</p>
         </div>
         <p><strong>Ingredients:</strong> ${renderIngredients(recipe.extendedIngredients)}</p>
         <button class="show-instructions-btn">Show Instructions</button>
@@ -161,15 +161,14 @@ const updateFilters = (button) => {
 };
 
 const sortAscending = (array) => {
-  array.sort((a, b) => a.readyInMinutes - b.readyInMinutes);
+  array.sort((a, b) => (a.readyInMinutes || 0) - (b.readyInMinutes || 0));
 };
 
 const sortDescending = (array) => {
-  array.sort((a, b) => b.readyInMinutes - a.readyInMinutes);
+  array.sort((a, b) => (b.readyInMinutes || 0) - (a.readyInMinutes || 0));
 };
 
 const applySortAndRender = () => {
-  // Apply the selected sorting
   if (selectedSort === 'ascending') {
     sortAscending(workingArray);
   } else {
@@ -197,8 +196,8 @@ filterButtons.forEach(button => {
 
 sortButtons.forEach(button => {
   button.addEventListener('click', () => {
-    // Update the selected sort option
     selectedSort = button.id;
+    console.log("Sort selected:", selectedSort); // För felsökning
     applySortAndRender();
   });
 });
