@@ -14,7 +14,7 @@ let selectedSort = 'ascending';
 
 const BASE_URL = "https://api.spoonacular.com/recipes/random";
 const API_KEY = "765002ba2ca14dffb9a0e1dd128843f1";
-const URL = `${BASE_URL}?apiKey=${API_KEY}&number=70`;
+const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=70`;
 
 // === FETCH FROM API ===
 const fetchData = async () => {
@@ -44,14 +44,9 @@ const fetchData = async () => {
     }
 
     const data = await response.json();
-    const apiRecipes = data.recipes.filter(recipe =>
-      recipe.image && recipe.title
-    );
-
-    localStorage.setItem("recipes", JSON.stringify(apiRecipes));
+    allRecipes = data.recipes;
+    localStorage.setItem("recipes", JSON.stringify(allRecipes));
     localStorage.setItem("recipesTimestamp", now.toISOString());
-
-    allRecipes = [...apiRecipes];
     workingArray = [...allRecipes];
     applySortAndRender();
   } catch (error) {
@@ -86,7 +81,16 @@ const renderInstructions = (recipe) => {
 const loadRecipes = (array) => {
   recipeContainer.innerHTML = '';
 
-  if (array.length === 0) {
+  const validRecipes = array.filter(recipe =>
+    recipe.title &&
+    recipe.image &&
+    recipe.extendedIngredients &&
+    Array.isArray(recipe.extendedIngredients) &&
+    recipe.analyzedInstructions &&
+    Array.isArray(recipe.analyzedInstructions)
+  );
+
+  if (validRecipes.length === 0) {
     const fallbackForCuisine = fallbackRecipes.filter(recipe =>
       recipe.cuisines.some(cuisine =>
         activeFilters.includes(cuisine.toLowerCase())
@@ -95,14 +99,14 @@ const loadRecipes = (array) => {
 
     if (fallbackForCuisine.length > 0) {
       recipeContainer.innerHTML = `<p>No recipes found from the API. Showing fallback results instead.</p>`;
-      array = fallbackForCuisine;
+      loadRecipes(fallbackForCuisine);
     } else {
       recipeContainer.innerHTML = '<p>No recipes found. Try again or choose another filter.</p>';
-      return;
     }
+    return;
   }
 
-  array.forEach(recipe => {
+  validRecipes.forEach(recipe => {
     const imageUrl = recipe.image?.startsWith('http') ? recipe.image : 'https://via.placeholder.com/300x200?text=No+Image';
     recipeContainer.innerHTML += `
       <article class="recipe-card" style="width: 300px">
@@ -158,7 +162,7 @@ const updateFilters = (button) => {
 
     workingArray = activeFilters.length > 0
       ? allRecipes.filter(recipe =>
-          recipe.cuisines.some(cuisine =>
+          recipe.cuisines?.some(cuisine =>
             activeFilters.includes(cuisine.toLowerCase())
           )
         )
